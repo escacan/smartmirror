@@ -4,11 +4,16 @@
  * MIT Licensed.
  */
 
+/*
+*		hong hong hong
+*
+*/
+
 var config = {
 	port: 8080,
 	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses.
 
-	language: "en",
+	language: "ko_KR",
 	timeFormat: 24,
 	units: "metric",
 
@@ -26,13 +31,13 @@ var config = {
 		},
 		{
 			module: "calendar",
-			header: "US Holidays",
+			header: "캘린더",
 			position: "top_left",
 			config: {
 				calendars: [
 					{
 						symbol: "calendar-check-o ",
-						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
+						url: "webcal://calendar.google.com/calendar/ical/shinhybi%40gmail.com/private-64fa82b06c771c6c605fa706387c1b31/basic.ics"
 					}
 				]
 			}
@@ -45,9 +50,9 @@ var config = {
 			module: "currentweather",
 			position: "top_right",
 			config: {
-				location: "New York",
-				locationID: "",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "YOUR_OPENWEATHER_API_KEY"
+				location: "Seoul",
+				locationID: "1835848",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "f785a8931e180fb4110bd6006b2411f5"
 			}
 		},
 		{
@@ -55,9 +60,9 @@ var config = {
 			position: "top_right",
 			header: "Weather Forecast",
 			config: {
-				location: "New York",
-				locationID: "5128581",  //ID from http://www.openweathermap.org/help/city_list.txt
-				appid: "YOUR_OPENWEATHER_API_KEY"
+				location: "Seoul",
+				locationID: "1835848",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "f785a8931e180fb4110bd6006b2411f5"
 			}
 		},
 		{
@@ -66,8 +71,8 @@ var config = {
 			config: {
 				feeds: [
 					{
-						title: "New York Times",
-						url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+						title: "실시간 뉴스속보",
+						url: "http://media.daum.net/rss/today/primary/all/rss2.xml"
 					}
 				],
 				showSourceTitle: true,
