@@ -19,90 +19,59 @@
 		var version = "#VERSION#";
 	</script>
 
-<script src = "https://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src = "https://code.jquery.com/jquery-1.9.1.min.js"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-<script>
-if (annyang) {
-   alert('annyang is ready');
-  // Let's define a command.
-  var commands = {
-            '안녕': function() {
-                responsiveVoice.speak("안녕하세요", "Korean Female");
-            },
-	    '잘자': function() {
-                alert('안녕히 주무세요');
-            },
-	    '고마워': function() {
-                alert('천만해요');
-            }
-        };
+	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+	<!-- annyang api 명령어 등록 -->
+	<script>
+	if (annyang) {
+	  // Let's define a command.
+	  var commands = {
+        '안녕': function() {
+		            location.href="http://localhost:8080/firstView";
+              }
+	        };
 
+	  annyang.setLanguage("ko");
+	  // Add our commands to annyang
+	  annyang.addCommands(commands);
 
-
-  annyang.setLanguage("ko");
-  // Add our commands to annyang
-  annyang.addCommands(commands);
-
-  // Start listening.
-  annyang.start();
-}
-</script>
-
-<!-- responsivevoice.js -->
-<script src= "http://code.responsivevoice.org/responsivevoice.js"></script>
-<script src= "text/javascript">
-	function say(){
-		if(responsiveVoice.voiceSupport()){
-			console.log("Responsive Voice Supported");
-			responsiveVoice.speak("테스트", "Korean Female");
-		}
+	  // Start listening.
+	  annyang.start();
 	}
-</script>
+	</script>
 
-
-<script>
-$(document).ready(function(){
-		if(responsiveVoice.voiceSupport()){
-			console.log("Responsive Voice Supported");
-			responsiveVoice.speak("환영합니다 고객님 사랑해요 고객님", "Korean Female");
+	<!-- responsivevoice.js -->
+	<script src= "http://code.responsivevoice.org/responsivevoice.js"></script>
+	<script>
+		function say(){
+			if(responsiveVoice.voiceSupport()){
+				console.log("Responsive Voice Supported");
+				responsiveVoice.speak("테스트", "Korean Female");
+			}
 		}
-	} )
-</script>
+	</script>
 
+	<script>
+	$(document).ready(function(){
+			responsiveVoice.speak("처음 화면", "Korean Female");
+/*
+			//로딩할 때마다 test.txt파일에서 데이터 가져오기
+			var morning, afternoon, night;
+			var contents = fs.readFileSync('./test.txt', 'utf8');
+			alert(contents);
+			temp= contents.split(":");
+			morning= temp[0];
+			afternoon= temp[1];
+			night= temp[2];
+
+			alert('아침 : ' + morning ', 점심 : ' + lunch + ', 저녁 : ' + night);
+
+			<!-- 매 분마다 시간별 알람 체크 -->
+*/
+	});
+	</script>
 </head>
 <body>
-	<div class="region fullscreen below"><div class="container"></div></div>
-	<div class="region top bar">
-		<div class="container"></div>
-		<div class="region top left"><div class="container"></div></div>
-		<div class="region top center"><div class="container"></div></div>
-		<div class="region top right"><div class="container"></div></div>
-	</div>
-	<div class="region upper third"><div class="container"></div></div>
-	<div class="region middle center"><div class="container"></div></div>
-	<div class="region lower third"><div class="container"><br/></div></div>
-	<div class="region bottom bar">
-		<div class="container"></div>
-		<div class="region bottom left"><div class="container"></div></div>
-		<div class="region bottom center"><div class="container"></div></div>
-		<div class="region bottom right"><div class="container"></div></div>
-	</div>
-	<div class="region fullscreen above"><div class="container"></div></div>
-	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript" src="js/defaults.js"></script>
-	<script type="text/javascript" src="#CONFIG_FILE#"></script>
-	<script type="text/javascript" src="vendor/vendor.js"></script>
-	<script type="text/javascript" src="modules/default/defaultmodules.js"></script>
-	<script type="text/javascript" src="js/logger.js"></script>
-	<script type="text/javascript" src="translations/translations.js"></script>
-	<script type="text/javascript" src="js/translator.js"></script>
-	<script type="text/javascript" src="js/class.js"></script>
-	<script type="text/javascript" src="js/module.js"></script>
-	<script type="text/javascript" src="js/loader.js"></script>
-	<script type="text/javascript" src="js/socketclient.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
-
-
 </body>
 </html>

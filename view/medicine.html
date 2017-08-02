@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Magic Mirror</title>
+	<meta name="google" content="notranslate" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="fonts/roboto.css">
+	<!-- custom.css is loaded by the loader.js to make sure it's loaded after the module css files. -->
+
+	<script type="text/javascript">
+		var version = "#VERSION#";
+	</script>
+	<!-- responsivevoice.js -->
+	<script src= "http://code.responsivevoice.org/responsivevoice.js"></script>
+
+	<script src = "https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+	<!-- annyang api 명령어 등록 -->
+	<script>
+	if (annyang) {
+	  // Let's define a command.
+	  var commands = {
+	        '아침': function() {
+	                responsiveVoice.speak("아침으로 등록할까요?", "Korean Female");
+	            	},
+		    	'점심': function() {
+	                responsiveVoice.speak("점심으로 등록할까요?", "Korean Female");
+								},
+					'저녁': function() {
+							responsiveVoice.speak("저녁으로 등록할까요?", "Korean Female");
+								},
+					'아침 점심': function() {
+			                responsiveVoice.speak("아침 점심으로 등록할까요?", "Korean Female");
+								},
+					'점심 저녁': function() {
+			                responsiveVoice.speak("점심 저녁으로 등록할까요?", "Korean Female");
+								},
+					'아침 저녁': function() {
+			                responsiveVoice.speak("아침 저녁으로 등록할까요?", "Korean Female");
+								},
+				    '아침 점심 저녁': function() {
+			                responsiveVoice.speak("아침 점심 저녁으로 등록할까요?", "Korean Female");
+		            },
+					'아니요': function(){
+		                	responsiveVoice.speak("처음 화면으로 돌아갈께요", "Korean Female");
+											location.href="http://localhost:8080/firstView";
+								}
+				};
+
+
+
+	  annyang.setLanguage("ko");
+	  // Add our commands to annyang
+	  annyang.addCommands(commands);
+
+	  // Start listening.
+	  annyang.start();
+	}
+	</script>
+
+</head>
+<body>
+    <h1> 약 언제 드세요? </h1>
+
+    <div
+    style = "
+    font-weight : bold;
+    font-size : 7.0em;
+    line_height : 1.0em;
+    ">
+        	<p align = "center">아침</p>
+        	<p align = "center">점심</p>
+        	<p align = "center">저녁</p>
+    </div>
+
+    <div
+    style = "
+    font-weight : bold;
+    font-size : 5.0em;
+    line_height : 1.0em;
+    ">
+        	<p align = "center">아니야...</p>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script language="javascript">
+
+//        var data = fs.readFileSync('./test.txt', 'utf8');
+        playAlert = setInterval(function() {      <!-- 추후 5분간 입력이 없으면 blank로, 있으면 clearInterval() -->
+
+        }, 3000);
+    </script>
+</body>
+</html>
