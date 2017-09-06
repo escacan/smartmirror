@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Magic Mirror</title>
@@ -29,7 +29,8 @@
 	  var commands = {
         '안녕': function() {
 								var contents = "#CONTENTS#";
-								location.href="http://localhost:8080/firstView" + "?" + contents + "?" + "none";
+								var diseaseContents = "#DISEASECONTENTS#";
+								location.href="http://localhost:8080/firstView" + "?" + contents + "?" + diseaseContents;
               }
 	        };
 

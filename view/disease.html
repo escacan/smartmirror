@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Magic Mirror</title>
@@ -43,13 +43,20 @@
 			':variable 먹어': function(variable) {
 	      alert(variable);
 				var s = location.href;
+				console.log(s);
 				s = s + "," + variable;
 				location.href= s;
 	    },
 			'이게 전부야':function(){
 				responsiveVoice.speak("처음화면으로 돌아갈께요", "Korean Female");
 				var fullurl= location.href.split("?");
+				fullurl[2] = decodeURI(fullurl[2]);
+				alert(fullurl[2]);
 				location.href= "http://localhost:8080/firstView" + "?" + fullurl[1] + "?" + fullurl[2];
+			},
+			'취소':function(){
+				responsiveVoice.speak("이전 화면으로 돌아갈께요", "Korean Female");
+				location.href= "http://localhost:8080/medi";
 			}
 		};
 
@@ -65,7 +72,7 @@
 
 </head>
 <body>
-		<h2> 약 언제 드세요? </h2>
+		<h2> 무슨 약 드세요? </h2>
 
     <div
     style = "
@@ -73,9 +80,8 @@
     font-size : 2.0em;
     line_height : 1.0em;
     ">
-        	<p align = "center">아침</p>
-        	<p align = "center">점심</p>
-        	<p align = "center">저녁</p>
+        	<p align = "center">ex) 감기약 먹어</p>
+        	<p align = "center">이게 전부야</p>
     </div>
 
     <div

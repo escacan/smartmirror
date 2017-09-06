@@ -70,13 +70,14 @@ var Server = function(config, callback) {
 		html = html.replace("#VERSION#", global.version);
 
 		var contents = fs.readFileSync(path.resolve(global.root_path + "/test.txt"), {encoding: "utf8"});
-
+		var diseaseContents = fs.readFileSync(path.resolve(global.root_path + "/disease.txt"), {encoding: "utf8"});
 		configFile = "config/config.js";
 		if (typeof(global.configuration_file) !== "undefined") {
 		    configFile = global.configuration_file;
 		}
 		html = html.replace("#CONFIG_FILE#", configFile);
 		html = html.replace("#CONTENTS#", contents);
+		html = html.replace("#DISEASECONTENTS#", diseaseContents);
 
 		res.send(html);
 	});
@@ -99,7 +100,7 @@ var Server = function(config, callback) {
 				  console.log('The file has been saved!');
 					});
 
-		fs.writeFile('disease.txt', temp[2], (err) => {
+		fs.writeFile('disease.txt', decodeURI(temp[2]), (err) => {
 				  if (err) throw err;
 				  console.log('The file has been saved!');
 					});
