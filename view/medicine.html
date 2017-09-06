@@ -26,33 +26,51 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 	<!-- annyang api 명령어 등록 -->
 	<script>
+	//몇알 먹는지 입력하는 함수
+/*
+	var ques[3]= {"아침엔 몇알 드시겠어요?", "점심엔 몇알 드시겠어요?", "저녁엔 몇알 드시겠어요?"}
+	var status[3]= {0, 0, 0};
+	var howMany = function(){
+		  for(var i= 0; i< 3; i++){
+					responsiveVoice.speak(ques[i], "Korean Female");
+			}
+	}
+*/
 	if (annyang) {
 	  // Let's define a command.
+		// location 설정시 ? : : 집어넣을것
 	  var commands = {
 	        '아침': function() {
-	                responsiveVoice.speak("아침으로 등록할까요?", "Korean Female");
+	                responsiveVoice.speak("아침으로 등록할께요", "Korean Female");
+									location.href="http://localhost:8080/dise?1:0:0?";
 	            	},
 		    	'점심': function() {
-	                responsiveVoice.speak("점심으로 등록할까요?", "Korean Female");
+	                responsiveVoice.speak("점심으로 등록할께요", "Korean Female");
+									location.href="http://localhost:8080/dise?0:1:0?";
 								},
 					'저녁': function() {
-							responsiveVoice.speak("저녁으로 등록할까요?", "Korean Female");
+							responsiveVoice.speak("저녁으로 등록할께요", "Korean Female");
+							location.href="http://localhost:8080/dise?0:0:1?";
 								},
 					'아침 점심': function() {
-			                responsiveVoice.speak("아침 점심으로 등록할까요?", "Korean Female");
+			                responsiveVoice.speak("아침 점심으로 등록할께요", "Korean Female");
+											location.href="http://localhost:8080/dise?1:1:0?";
 								},
 					'점심 저녁': function() {
-			                responsiveVoice.speak("점심 저녁으로 등록할까요?", "Korean Female");
+			                responsiveVoice.speak("점심 저녁으로 등록할께요", "Korean Female");
+											location.href="http://localhost:8080/dise?0:1:1?";
 								},
 					'아침 저녁': function() {
-			                responsiveVoice.speak("아침 저녁으로 등록할까요?", "Korean Female");
+			                responsiveVoice.speak("아침 저녁으로 등록할께요", "Korean Female");
+											location.href="http://localhost:8080/dise?1:0:1?";
 								},
 				    '아침 점심 저녁': function() {
-			                responsiveVoice.speak("아침 점심 저녁으로 등록할까요?", "Korean Female");
-		            },
-					'아니요': function(){
+			                responsiveVoice.speak("아침 점심 저녁으로 등록할께요", "Korean Female");
+											location.href="http://localhost:8080/dise?1:1:1?";
+								},
+					'취소': function(){
 		                	responsiveVoice.speak("처음 화면으로 돌아갈께요", "Korean Female");
-											location.href="http://localhost:8080/firstView";
+											history.go(-1)();
 								}
 				};
 
@@ -64,17 +82,18 @@
 
 	  // Start listening.
 	  annyang.start();
+		responsiveVoice.speak("약을 언제 드세요?", "Korean Female");
 	}
 	</script>
 
 </head>
 <body>
-    <h1> 약 언제 드세요? </h1>
+		<h2> 약 언제 드세요? </h2>
 
     <div
     style = "
     font-weight : bold;
-    font-size : 7.0em;
+    font-size : 2.0em;
     line_height : 1.0em;
     ">
         	<p align = "center">아침</p>
@@ -85,10 +104,10 @@
     <div
     style = "
     font-weight : bold;
-    font-size : 5.0em;
+    font-size : 1.5em;
     line_height : 1.0em;
     ">
-        	<p align = "center">아니야...</p>
+        	<p align = "right">취소</p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

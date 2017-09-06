@@ -28,7 +28,8 @@
 	  // Let's define a command.
 	  var commands = {
         '안녕': function() {
-		            location.href="http://localhost:8080/firstView";
+								var contents = "#CONTENTS#";
+								location.href="http://localhost:8080/firstView" + "?" + contents + "?" + "none";
               }
 	        };
 
@@ -53,24 +54,29 @@
 	</script>
 
 	<script>
-	$(document).ready(function(){
+/*	$(document).ready(function(){
+
 			responsiveVoice.speak("처음 화면", "Korean Female");
-/*
-			//로딩할 때마다 test.txt파일에서 데이터 가져오기
-			var morning, afternoon, night;
-			var contents = fs.readFileSync('./test.txt', 'utf8');
+			var contents = "#CONTENTS#";
 			alert(contents);
+*/
+			//로딩할 때마다 test.txt파일에서 데이터 가져오기
+/*		var morning, afternoon, night;
 			temp= contents.split(":");
 			morning= temp[0];
 			afternoon= temp[1];
 			night= temp[2];
-
-			alert('아침 : ' + morning ', 점심 : ' + lunch + ', 저녁 : ' + night);
-
-			<!-- 매 분마다 시간별 알람 체크 -->
 */
+			<!-- 매 분마다 시간별 알람 체크 -->
+/*			playAlert = setInterval(function() {      <!-- 추후 5분간 입력이 없으면 blank로, 있으면 clearInterval() -->
+					location.href="http://localhost:8080/firstView" + "?" + contents;
+			}, 3000);
+
 	});
+*/
 	</script>
+
+
 </head>
 <body>
 </body>

@@ -35,6 +35,7 @@
 												location.href="http://localhost:8080";
 				            },
 					    '고마워': function() {
+												console.log("고맙다 명령어 입력");
 				                responsiveVoice.speak("천만해요", "Korean Female");
 				            },
 							'약 입력': function() {
@@ -68,18 +69,19 @@
 	$(document).ready(function(){
 		if(responsiveVoice.voiceSupport()){
 			console.log("Responsive Voice Supported");
-			responsiveVoice.speak("환영합니다 고객님 사랑해요 고객님", "Korean Female");
+			responsiveVoice.speak("환영합니다", "Korean Female");
 		}
 			//로딩할 때마다 test.txt파일에서 데이터 가져오기
-/*
-			var fs= require("fs");
+			console.log(location.href);
+			var fullurl= location.href.split("?");
+
 			var morning, afternoon, night;
-			var contents = fs.readFileSync('./test.txt', 'utf8');
+			var contents = fullurl[1];
 			temp= contents.split(":");
 			morning= temp[0];
 			afternoon= temp[1];
 			night= temp[2];
-			console.log('아침 : ' + morning + ', 점심 : ' + lunch + ', 저녁 : ' + night);
+			console.log('아침 : ' + morning + ', 점심 : ' + afternoon + ', 저녁 : ' + night);
 
 			<!-- 매 분마다 시간별 알람 체크 -->
 			playAlert = setInterval(function() {      <!-- 추후 5분간 입력이 없으면 blank로, 있으면 clearInterval() -->
@@ -97,7 +99,7 @@
 					responsiveVoice.speak("저녁 약 드실 시간이에요. 약드세요.", "Korean Female");
 				}
 			}, 60000);
-*/
+
 	});
 	</script>
 </head>

@@ -5,6 +5,7 @@
  * MIT Licensed.
  */
 
+var url = require("url");
 var express = require("express");
 var app = require("express")();
 var server = require("http").Server(app);
@@ -52,23 +53,57 @@ var Server = function(config, callback) {
 	app.get("/version", function(req,res) {
 		res.send(global.version);
 	});
-
+/*
+	app.get("/data", function(req,res) {
+		var inputData = req.url;
+		console.log(inputData);
+		fs.writeFile('test.txt', inputData.search, (err) => {
+				  if (err) throw err;
+				  console.log('The file has been saved!');
+				});
+		return;
+	});
+*/
 	<!-- 시작 화면 -->
 	app.get("/", function(req, res) {
 		var html = fs.readFileSync(path.resolve(global.root_path + "/index.html"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
+
+		var contents = fs.readFileSync(path.resolve(global.root_path + "/test.txt"), {encoding: "utf8"});
 
 		configFile = "config/config.js";
 		if (typeof(global.configuration_file) !== "undefined") {
 		    configFile = global.configuration_file;
 		}
 		html = html.replace("#CONFIG_FILE#", configFile);
+		html = html.replace("#CONTENTS#", contents);
 
 		res.send(html);
 	});
 
 	<!-- 전원이 켜진 화면 -->
 	app.get("/firstView", function(req, res) {
+	 	var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+		console.log(fullUrl);
+
+		var temp= fullUrl.split("?");
+		var morning, afternoon, night;
+		var temp2= temp[1].split(":");
+		morning= temp2[0];
+		afternoon= temp2[1];
+		night= temp2[2];
+
+		console.log(temp2[0] + "," + temp2[1] + "," + temp2[2]);
+		fs.writeFile('test.txt', temp2[0] + ":" + temp2[1] + ":" + temp2[2], (err) => {
+				  if (err) throw err;
+				  console.log('The file has been saved!');
+					});
+
+		fs.writeFile('disease.txt', temp[2], (err) => {
+				  if (err) throw err;
+				  console.log('The file has been saved!');
+					});
+
 		var html = fs.readFileSync(path.resolve(global.root_path + "/view/firstView.html"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
 
@@ -85,12 +120,27 @@ var Server = function(config, callback) {
 	app.get("/medi", function(req, res) {
 		var html = fs.readFileSync(path.resolve(global.root_path + "/view/medicine.html"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
-
+/*
 		configFile = "config/config.js";
 		if (typeof(global.configuration_file) !== "undefined") {
 		    configFile = global.configuration_file;
 		}
 		html = html.replace("#CONFIG_FILE#", configFile);
+*/
+		res.send(html);
+	});
+
+	<!-- 약 종류 입력 화면 -->
+	app.get("/dise", function(req, res) {
+		var html = fs.readFileSync(path.resolve(global.root_path + "/view/disease.html"), {encoding: "utf8"});
+		html = html.replace("#VERSION#", global.version);
+		/*
+		configFile = "config/config.js";
+		if (typeof(global.configuration_file) !== "undefined") {
+		    configFile = global.configuration_file;
+		}
+		html = html.replace("#CONFIG_FILE#", configFile);
+    */
 
 		res.send(html);
 	});
