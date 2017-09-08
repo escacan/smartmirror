@@ -41,7 +41,6 @@
 		// location 설정시 ? : : 집어넣을것
 		var commands = {
 			':variable 먹어': function(variable) {
-	      alert(variable);
 				var s = location.href;
 				console.log(s);
 				s = s + "," + variable;
@@ -51,7 +50,6 @@
 				responsiveVoice.speak("처음화면으로 돌아갈께요", "Korean Female");
 				var fullurl= location.href.split("?");
 				fullurl[2] = decodeURI(fullurl[2]);
-				alert(fullurl[2]);
 				location.href= "http://localhost:8080/firstView" + "?" + fullurl[1] + "?" + fullurl[2];
 			},
 			'취소':function(){

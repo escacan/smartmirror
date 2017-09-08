@@ -28,6 +28,7 @@
 	  // Let's define a command.
 	  var commands = {
         '안녕': function() {
+								<!-- 코드 정리 필요 -->
 								var contents = "#CONTENTS#";
 								var diseaseContents = "#DISEASECONTENTS#";
 								location.href="http://localhost:8080/firstView" + "?" + contents + "?" + diseaseContents;
@@ -55,26 +56,35 @@
 	</script>
 
 	<script>
-/*	$(document).ready(function(){
-
+	var contents = "#CONTENTS2#";
+	$(document).ready(function(){
 			responsiveVoice.speak("처음 화면", "Korean Female");
-			var contents = "#CONTENTS#";
-			alert(contents);
-*/
+
 			//로딩할 때마다 test.txt파일에서 데이터 가져오기
-/*		var morning, afternoon, night;
+			var morning, afternoon, night;
 			temp= contents.split(":");
 			morning= temp[0];
 			afternoon= temp[1];
 			night= temp[2];
-*/
+
 			<!-- 매 분마다 시간별 알람 체크 -->
-/*			playAlert = setInterval(function() {      <!-- 추후 5분간 입력이 없으면 blank로, 있으면 clearInterval() -->
-					location.href="http://localhost:8080/firstView" + "?" + contents;
-			}, 3000);
+			playAlert = setInterval(function() {      <!-- 추후 5분간 입력이 없으면 blank로, 있으면 clearInterval() -->
+				var date= new Date();
+				<!-- 아침 알람( 오전 아홉시 ) -->
+				if(date.getHours() == 9 && date.getMinutes() == 0 && morning == 1){
+					responsiveVoice.speak("아침 약 드실 시간이에요. 약드세요.", "Korean Female");
+				}
+				<!-- 점심 알람( 오후 열두시 ) -->
+				if(date.getHours() == 12 && date.getMinutes() == 0 && afternoon == 1){
+					responsiveVoice.speak("점심 약 드실 시간이에요. 약드세요.", "Korean Female");
+				}
+				<!-- 저녁 알람( 오후 여섯시 ) -->
+				if(date.getHours() == 18 && date.getMinutes() == 0 && night == 1){
+					responsiveVoice.speak("저녁 약 드실 시간이에요. 약드세요.", "Korean Female");
+				}
+			}, 60000);
 
 	});
-*/
 	</script>
 
 

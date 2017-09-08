@@ -1,4 +1,4 @@
-/* global Log, Module, moment */
+﻿/* global Log, Module, moment */
 
 /* Magic Mirror
  * Module: Compliments
@@ -12,9 +12,9 @@ Module.register("compliments", {
 	defaults: {
 		compliments: {
 			anytime: [
-				"안녕하세요?"
+				"안녕하세요?",
 			],
-			morning: [
+/*			morning: [
 				"좋은 아침입니다!",
 				"즐거운 하루 되세요~",
 				"안녕히 주무셨어요?"
@@ -28,6 +28,10 @@ Module.register("compliments", {
 				"벌써 저녁이네요",
 				"즐거운 하루 되셨나요?",
 				"저녁 맛있게 드셨나요?"
+			],																*/
+			prevention: [
+				"예방1",
+				"예방2"
 			]
 		},
 		updateInterval: 30000,
@@ -95,6 +99,15 @@ Module.register("compliments", {
 	 * return compliments Array<String> - Array with compliments for the time of the day.
 	 */
 	complimentArray: function() {
+		var fullUrl = location.href;
+		console.log(fullUrl);
+
+		var temp= fullUrl.split("?");
+		var diseaseList= decodeURI(temp[2]).split(",");
+		for(var i= 1; i< diseaseList.length; i++){
+			diseaseList[i]= diseaseList[i].substr(0,2);
+		}
+
 		var hour = moment().hour();
 		var compliments = null;
 
@@ -102,7 +115,7 @@ Module.register("compliments", {
 			compliments = this.config.compliments.morning;
 		} else if (hour >= 12 && hour < 17) {
 			compliments = this.config.compliments.afternoon;
-		} else {
+		} else{
 			compliments = this.config.compliments.evening;
 		}
 
@@ -115,6 +128,7 @@ Module.register("compliments", {
 		}
 
 		compliments.push.apply(compliments, this.config.compliments.anytime);
+		compliments.push.apply(compliments, this.config.compliments.prevention);
 
 		return compliments;
 

@@ -70,7 +70,9 @@
 								},
 					'취소': function(){
 		                	responsiveVoice.speak("처음 화면으로 돌아갈께요", "Korean Female");
-											history.go(-1)();
+											var contents = "#CONTENTS#";
+											var diseaseContents = "#DISEASECONTENTS#";
+											location.href="http://localhost:8080/firstView" + "?" + contents + "?" + diseaseContents;
 								}
 				};
 

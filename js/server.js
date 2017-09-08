@@ -77,6 +77,7 @@ var Server = function(config, callback) {
 		}
 		html = html.replace("#CONFIG_FILE#", configFile);
 		html = html.replace("#CONTENTS#", contents);
+		html = html.replace("#CONTENTS2#", contents);
 		html = html.replace("#DISEASECONTENTS#", diseaseContents);
 
 		res.send(html);
@@ -104,6 +105,41 @@ var Server = function(config, callback) {
 				  if (err) throw err;
 				  console.log('The file has been saved!');
 					});
+		<!-- 예방.txt의 정보로 comple.txt를 초기화 -->
+		var prevention = fs.readFileSync(path.resolve(global.root_path + "/예방.txt"), {encoding: "utf8"});
+		fs.writeFile('comple.txt', prevention, (err) => {
+					if (err) throw err;
+					console.log('The file has been saved!');
+					});
+
+		var keyWord = decodeURI(temp[2]).split(",");
+//		console.log(keyWord.length);
+//		var keyNum = Math.floor(Math.random() * ( keyWord.length - 1)) + 1;
+
+//		console.log(keyWord[keyNum]);
+
+		<!-- 키워드의 첫 두글자를 잘라냄 -->
+		for(var i= 1; i< keyWord.length; i++){
+			keyWord[i]= keyWord[i].substr(0,2);
+		}
+
+		<!-- 키워드에 해당하는 파일명 탐색 -->
+		for(var i= 1; i< keyWord.length; i++){
+			var str = keyWord[i] + ".txt";
+			fs.readFile(str, 'utf8', function(err, data) {
+				if(err) {
+						// 파일 읽기 실패
+						console.log("file not exist");
+				}
+				else {
+						// 파일 읽기 성공
+						fs.appendFile('comple.txt', data, (err) => {
+						  if (err) throw err;
+						  console.log('The data was appended to file!');
+						});
+				}
+			});
+		}
 
 		var html = fs.readFileSync(path.resolve(global.root_path + "/view/firstView.html"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
@@ -114,6 +150,20 @@ var Server = function(config, callback) {
 		}
 		html = html.replace("#CONFIG_FILE#", configFile);
 
+		<!-- comple.txt의 정보를 firstView로 전달 -->
+		fs.readFile('comple.txt', 'utf8', function(err, data) {
+			if(err) {
+					// 파일 읽기 실패
+					console.log("file not exist");
+			}
+			else {
+					// 파일 읽기 성공
+					var content = data.split("\n");
+					var compleNum = Math.floor(Math.random() * ( content.length - 1));
+					console.log(content[compleNum]);
+					document.write(content[compleNum]);
+			}
+		});
 		res.send(html);
 	});
 
@@ -121,13 +171,12 @@ var Server = function(config, callback) {
 	app.get("/medi", function(req, res) {
 		var html = fs.readFileSync(path.resolve(global.root_path + "/view/medicine.html"), {encoding: "utf8"});
 		html = html.replace("#VERSION#", global.version);
-/*
-		configFile = "config/config.js";
-		if (typeof(global.configuration_file) !== "undefined") {
-		    configFile = global.configuration_file;
-		}
-		html = html.replace("#CONFIG_FILE#", configFile);
-*/
+
+		var contents = fs.readFileSync(path.resolve(global.root_path + "/test.txt"), {encoding: "utf8"});
+		var diseaseContents = fs.readFileSync(path.resolve(global.root_path + "/disease.txt"), {encoding: "utf8"});
+		html = html.replace("#CONTENTS#", contents);
+		html = html.replace("#DISEASECONTENTS#", diseaseContents);
+
 		res.send(html);
 	});
 
